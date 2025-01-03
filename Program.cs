@@ -16,6 +16,18 @@ namespace Sork
                 {
                     Console.WriteLine("You laugh out loud");
                 }
+                else if (input == "dance")
+                {
+                    Console.WriteLine("Cha cha cha");
+                }
+                else if (input == "sing")
+                {
+                    Console.WriteLine("Your singing is ....heard");
+                }
+                else if (input == "whistle")
+                {
+                    Console.WriteLine("What a lovely tune");
+                }
                 else if (input == "exit")
                 {
                     break;
