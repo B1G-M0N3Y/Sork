@@ -22,7 +22,7 @@ namespace Sork
                 }
                 else if (input == "sing")
                 {
-                    Console.WriteLine("Your singing is ....heard");
+                    Console.WriteLine("Play Freebird!");
                 }
                 else if (input == "whistle")
                 {
