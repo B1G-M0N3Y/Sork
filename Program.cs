@@ -1,23 +1,25 @@
-﻿namespace Sork;
+﻿using Sork.Commands;
+
+namespace Sork;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        ICommand lol = new LaughCommand();
-        ICommand exit = new ExitCommand();
-        ICommand dance = new DanceCommand();
-        ICommand sing = new SingCommand();
-        ICommand whistle = new WhistleCommand();
+        UserInputOutput io = new UserInputOutput();
+        ICommand lol = new LaughCommand(io);
+        ICommand exit = new ExitCommand(io);
+        ICommand dance = new DanceCommand(io);
+        ICommand sing = new SingCommand(io);
+        ICommand whistle = new WhistleCommand(io);
         List<ICommand> commands = new List<ICommand> { lol, dance, sing, whistle, exit };
         var result = new CommandResult { RequestExit = false, IsHandled = false };
         var handled = false;
         do
         {
-            Console.Write(">");
-            string input = Console.ReadLine();
-            input = input.ToLower();
-            input = input.Trim();
+            io.WritePrompt(">");
+            string input = io.ReadInput();
+
             foreach (var command in commands)
             {
                 if (command.Handles(input))
@@ -36,9 +38,46 @@ public class Program
             }
             if (!handled)
             {
-                Console.WriteLine("Unknown command");
+                io.WriteMessageLine("Unknown command");
             }
+            handled = false;
         } while (true);
     }
 }
 
+public class UserInputOutput
+{
+    public void WritePrompt(string prompt)
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write(prompt);
+        Console.ResetColor();
+    }
+    
+    public void WriteMessage(string message)
+    {
+        Console.Write(message);
+    }
+    
+    public void WriteNoun(string noun)
+    {
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.Write(noun);
+        Console.ResetColor();
+    }
+    
+    public void WriteMessageLine(string message)
+    {
+        Console.WriteLine(message);
+    }
+    
+    public string ReadInput()
+    {
+        return Console.ReadLine().Trim();
+    }
+    
+    public string ReadKey()
+    {
+        return Console.ReadKey().KeyChar.ToString();
+    }
+}
