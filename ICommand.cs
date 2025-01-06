@@ -1,5 +1,6 @@
-    public interface ICommand
-    {
-        bool Handles(string userInput);
-        CommandResult Execute();
-    }
+namespace Sork;
+public interface ICommand
+{
+    bool Handles(string userInput);
+    CommandResult Execute();
+}
