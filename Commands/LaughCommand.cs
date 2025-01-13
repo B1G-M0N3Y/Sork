@@ -1,4 +1,5 @@
 namespace Sork.Commands;
+using Sork.World;
 public class LaughCommand : BaseCommand
 {
     private readonly UserInputOutput io;
@@ -11,10 +12,11 @@ public class LaughCommand : BaseCommand
         return GetCommandFromInput(userInput) == "lol";
     }
 
-    public override CommandResult Execute()
+    public override CommandResult Execute(string userInput, GameState gameState)
     {
         io.WriteNoun("You");
-        io.WriteMessageLine(" laugh out loud");
+        io.WriteMessageLine(" laugh out loud!");
+
         return new CommandResult { RequestExit = false, IsHandled = true };
     }
 }
