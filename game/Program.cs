@@ -9,7 +9,7 @@ public class Program
     {
         var services = new ServiceCollection();
         
-        services.AddSingleton<UserInputOutput>();
+        services.AddSingleton<IUserInputOutput, UserInputOutput>();
         services.AddSingleton<GameState>(sp => GameState.Create(sp.GetRequiredService<UserInputOutput>()));
         
         var commandTypes = typeof(ICommand).Assembly.GetTypes()
@@ -24,7 +24,7 @@ public class Program
 
         var gameState = provider.GetRequiredService<GameState>();
         var commands = provider.GetServices<ICommand>().ToList();
-        var io = provider.GetRequiredService<UserInputOutput>();
+        var io = provider.GetRequiredService<IUserInputOutput>();
         
         do
         {

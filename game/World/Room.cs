@@ -1,6 +1,6 @@
 namespace Sork.World;
 
-public class Room 
+public class Room
 {
     public required string Name { get; set; }
     public required string Description { get; set; }
