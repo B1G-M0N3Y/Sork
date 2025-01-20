@@ -20,9 +20,21 @@ public class TakeCommand : BaseCommand
             io.WriteMessageLine("You must specify an item to take.");
             return new CommandResult { RequestExit = false, IsHandled = false };
         }
-        // var direction = GetParametersFromInput(userInput)[0].ToLower();
-        // gameState.Player.Location = gameState.Player.Location.Exits[direction];
-        // io.WriteMessageLine($"You move to {gameState.Player.Location.Name}.");
+        var item = gameState
+            .Player
+            .Location
+            .Inventory
+            .FirstOrDefault(i => i.Name.ToLower() == parameters[0].ToLower());
+        
+        if (item == null)
+        {
+            io.WriteMessageLine("You don't see that item here.");
+            return new CommandResult { RequestExit = false, IsHandled = false };
+        }
+        
+        gameState.Player.Inventory.Add(item);
+        gameState.Player.Location.Inventory.Remove(item);
+        
         return new CommandResult { RequestExit = false, IsHandled = true };
     }
 }
