@@ -25,7 +25,6 @@ public class TestInputOutput : IUserInputOutput
 
     public void WriteNoun(string noun)
     {
-        throw new NotImplementedException();
     }
 
     public void WritePrompt(string prompt)
