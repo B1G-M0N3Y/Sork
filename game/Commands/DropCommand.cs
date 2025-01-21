@@ -34,6 +34,7 @@ public class DropCommand : BaseCommand
         
         gameState.Player.Location.Inventory.Add(item);
         gameState.Player.Inventory.Remove(item);
+        
         return new CommandResult { RequestExit = false, IsHandled = true };
     }
 }

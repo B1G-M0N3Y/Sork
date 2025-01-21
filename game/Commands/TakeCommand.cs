@@ -15,11 +15,13 @@ public class TakeCommand : BaseCommand
     public override CommandResult Execute(string userInput, GameState gameState)
     {
         var parameters = GetParametersFromInput(userInput);
+        
         if (parameters.Length == 0)
         {
             io.WriteMessageLine("You must specify an item to take.");
             return new CommandResult { RequestExit = false, IsHandled = false };
         }
+        
         var item = gameState
             .Player
             .Location
